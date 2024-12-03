@@ -33,8 +33,11 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-dropdown-link :href="route('mahasiswa-index')">
+                            Data Mahasiswa
+                        </x-dropdown-link>
                         <x-dropdown-link :href="route('mahasiswa-create')">
-                            Mahasiswa
+                            Tambah Mahasiswa
                         </x-dropdown-link>
                     </x-slot>
                 </x-dropdown>

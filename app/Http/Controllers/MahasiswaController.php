@@ -12,7 +12,10 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $data = Mahasiswa::all();
+
+        // Return the view with the data
+        return view('master-data.data-master.index-mahasiswa', compact('data'));
     }
 
     /**
@@ -35,8 +38,12 @@ class MahasiswaController extends Controller
         ]);
 
         Mahasiswa::create($validasi_data);
-        return redirect()->back()->with('success', 'Mahasiswa created successfully!');
+
+        $data = Mahasiswa::all();
+
+        return view('master-data.mahasiswa-master.create-mahasiswa', compact('data'))->with('success', 'Mahasiswa created successfully!');
     }
+
 
     /**
      * Display the specified resource.
@@ -51,7 +58,10 @@ class MahasiswaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Mahasiswa::findOrFail($id);
+
+        // Menampilkan view dengan data mahasiswa yang akan diedit
+        return view('master-data.data-master.edit-mahasiswa', compact('mahasiswa'));
     }
 
     /**
@@ -59,7 +69,20 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validasi_data = $request->validate([
+            'nama'  => 'required|string|max:255',
+            'npm'   => 'required|string|max:20',
+            'prodi' => 'required|string|max:50',
+        ]);
+
+        // Mencari mahasiswa berdasarkan id
+        $data = Mahasiswa::findOrFail($id);
+
+        // Update data mahasiswa
+        $data->update($validasi_data);
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('mahasiswa-index')->with('success', 'Mahasiswa updated successfully!');
     }
 
     /**
@@ -67,6 +90,12 @@ class MahasiswaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        // Menghapus data mahasiswa
+        $mahasiswa->delete();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('mahasiswa-index')->with('success', 'Mahasiswa deleted successfully!');
     }
 }
