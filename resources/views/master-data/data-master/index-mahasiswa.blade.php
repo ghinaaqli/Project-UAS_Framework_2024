@@ -21,6 +21,7 @@
                                     <th class="px-4 py-2 border-b text-left">Nama</th>
                                     <th class="px-4 py-2 border-b text-left">NPM</th>
                                     <th class="px-4 py-2 border-b text-left">Prodi</th>
+                                    <th class="px-4 py-2 border-b text-left">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,6 +30,17 @@
                                     <td class="px-4 py-2 border-b">{{ $mahasiswa->nama }}</td>
                                     <td class="px-4 py-2 border-b">{{ $mahasiswa->npm }}</td>
                                     <td class="px-4 py-2 border-b">{{ $mahasiswa->prodi }}</td>
+                                    <td class="px-4 py-2 border-b">
+                                        <!-- Edit Mahasiswa -->
+                                        <a href="{{ route('mahasiswa-edit', $mahasiswa->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a> |
+
+                                        <!-- Delete Mahasiswa -->
+                                        <form action="{{ route('mahasiswa-destroy', $mahasiswa->id) }}" method="POST" class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

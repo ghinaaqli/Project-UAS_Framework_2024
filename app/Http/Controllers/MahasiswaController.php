@@ -7,28 +7,20 @@ use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Fungsi untuk menampilkan data mahasiswa
     public function index()
     {
-        $data = Mahasiswa::all();
-
-        // Return the view with the data
+        $data = Mahasiswa::all(); // Ambil semua data mahasiswa
         return view('master-data.data-master.index-mahasiswa', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Fungsi untuk menampilkan form create (input data mahasiswa)
     public function create()
     {
         return view("master-data.mahasiswa-master.create-mahasiswa");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Fungsi untuk menyimpan data mahasiswa baru
     public function store(Request $request)
     {
         $validasi_data = $request->validate([
@@ -38,36 +30,18 @@ class MahasiswaController extends Controller
         ]);
 
         Mahasiswa::create($validasi_data);
-
-        $data = Mahasiswa::all();
-
-        return view('master-data.mahasiswa-master.create-mahasiswa', compact('data'))->with('success', 'Mahasiswa created successfully!');
+        return redirect()->route('mahasiswa-index')->with('success', 'Mahasiswa created successfully!');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // Fungsi untuk menampilkan data mahasiswa yang akan diedit
+    public function edit($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        $data = Mahasiswa::findOrFail($id);
-
-        // Menampilkan view dengan data mahasiswa yang akan diedit
+        $mahasiswa = Mahasiswa::findOrFail($id);
         return view('master-data.data-master.edit-mahasiswa', compact('mahasiswa'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // Fungsi untuk memperbarui data mahasiswa
+    public function update(Request $request, $id)
     {
         $validasi_data = $request->validate([
             'nama'  => 'required|string|max:255',
@@ -75,27 +49,18 @@ class MahasiswaController extends Controller
             'prodi' => 'required|string|max:50',
         ]);
 
-        // Mencari mahasiswa berdasarkan id
-        $data = Mahasiswa::findOrFail($id);
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $mahasiswa->update($validasi_data);
 
-        // Update data mahasiswa
-        $data->update($validasi_data);
-
-        // Redirect dengan pesan sukses
         return redirect()->route('mahasiswa-index')->with('success', 'Mahasiswa updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    // Fungsi untuk menghapus data mahasiswa
+    public function destroy($id)
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
-
-        // Menghapus data mahasiswa
         $mahasiswa->delete();
 
-        // Redirect dengan pesan sukses
         return redirect()->route('mahasiswa-index')->with('success', 'Mahasiswa deleted successfully!');
     }
 }
