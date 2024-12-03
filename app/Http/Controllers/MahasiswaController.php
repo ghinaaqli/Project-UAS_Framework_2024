@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use App\Exports\MahasiswaExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MahasiswaController extends Controller
 {
@@ -62,5 +64,10 @@ class MahasiswaController extends Controller
         $mahasiswa->delete();
 
         return redirect()->route('mahasiswa-index')->with('success', 'Mahasiswa deleted successfully!');
+    }
+
+    public function export()
+    {
+        return Excel::download(new MahasiswaExport, 'mahasiswa.xlsx');
     }
 }

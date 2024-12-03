@@ -14,6 +14,11 @@
 
                         <x-auth-session-status class="mb-4" :status="session('success')" />
 
+                        <!-- Tombol Export ke Excel -->
+                        <a href="{{ route('mahasiswa.export') }}" class="inline-flex items-center px-4 py-2 mb-4 text-sm font-medium text-white bg-green-500 border border-transparent rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            Export ke Excel
+                        </a>
+
                         <!-- Menampilkan Daftar Mahasiswa -->
                         <table class="min-w-full mt-4 table-auto border-collapse border border-gray-200">
                             <thead>
