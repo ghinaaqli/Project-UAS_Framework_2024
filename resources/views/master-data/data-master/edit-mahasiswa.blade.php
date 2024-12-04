@@ -14,7 +14,6 @@
 
                         <x-auth-session-status class="mb-4" :status="session('success')" />
 
-                        <!-- Form untuk edit mahasiswa -->
                         <form action="{{ route('mahasiswa-update', $mahasiswa->id) }}" method="POST" class="space-y-4">
                             @csrf
                             @method('PUT')
@@ -34,9 +33,8 @@
                                 <input id="prodi" name="prodi" rows="3" class="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="{{ old('prodi', $mahasiswa->prodi) }}">
                             </div>
 
-                            <button type="submit" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-black bg-blue-300 border border-transparent rounded-md shadow-sm hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                Update
-                            </button>
+                            <button type="update" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4">Update</button>
+
                         </form>
                     </div>
 

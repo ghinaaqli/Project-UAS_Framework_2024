@@ -14,12 +14,6 @@
 
                         <x-auth-session-status class="mb-4" :status="session('success')" />
 
-                        <!-- Tombol Export ke Excel -->
-                        <a href="{{ route('mahasiswa.export') }}" class="inline-flex items-center px-4 py-2 mb-4 text-sm font-medium text-white bg-green-500 border border-transparent rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                            Export ke Excel
-                        </a>
-
-                        <!-- Menampilkan Daftar Mahasiswa -->
                         <table class="min-w-full mt-4 table-auto border-collapse border border-gray-200">
                             <thead>
                                 <tr>
@@ -36,10 +30,7 @@
                                     <td class="px-4 py-2 border-b">{{ $mahasiswa->npm }}</td>
                                     <td class="px-4 py-2 border-b">{{ $mahasiswa->prodi }}</td>
                                     <td class="px-4 py-2 border-b">
-                                        <!-- Edit Mahasiswa -->
                                         <a href="{{ route('mahasiswa-edit', $mahasiswa->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a> |
-
-                                        <!-- Delete Mahasiswa -->
                                         <form action="{{ route('mahasiswa-destroy', $mahasiswa->id) }}" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
@@ -50,6 +41,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                        <a href="{{ route('mahasiswa-export') }}">
+                            <button class="px-4 py-2 text-white bg-blue-500 border border-blue-500 rounded-lg shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-4 text-sm">
+                                Export to Excel
+                            </button>
+                        </a>
+
                     </div>
 
                     @vite('resources/js/app.js')
