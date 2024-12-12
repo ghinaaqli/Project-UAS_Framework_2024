@@ -20,7 +20,6 @@
                                     <th class="px-4 py-2 border-b text-left">Nama</th>
                                     <th class="px-4 py-2 border-b text-left">NPM</th>
                                     <th class="px-4 py-2 border-b text-left">Prodi</th>
-                                    <th class="px-4 py-2 border-b text-left">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
